@@ -6,6 +6,6 @@ resource "null_resource" "web" {
   }
 
   provisioner "local-exec" {
-    command = "ansible-playbook -i ansible/inventario ansible/playbook.yml"
+    command = "sleep 20;ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i ansible/inventory ansible/playbook.yml"
   }
 }
