@@ -1,0 +1,25 @@
+---
+    - name: Copiando o diretorio do projeto
+      copy:
+       src: files
+       dest: /home/ubuntu/
+       owner: ubuntu
+       group: ubuntu
+       mode: 0744 
+      become: true
+    
+    - name: Executando script para Geração do certificado
+      shell: /home/ubuntu/files/script.sh {{ ansible_host }}
+      become: yes
+
+    - name: Reiniciando serviço do prosody
+      shell: systemctl restart prosody
+      become: yes  
+
+
+    
+
+      
+
+
+

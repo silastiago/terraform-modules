@@ -1,0 +1,36 @@
+---
+
+    - name: Atualizando repositorios
+      apt: update_cache=yes
+      become: yes
+
+
+    - name: Instalando pacotes
+      apt:
+        pkg:
+        - prosody
+        - expect
+      become: yes    
+
+    - name: Executando sed para alterar o nome do virtualhost do prosody
+      shell: sed -i "s/VirtualHost \"example.com\"/VirtualHost \"{{ ansible_host }}\"/" /etc/prosody/prosody.cfg.lua 
+      become: yes
+      
+    - name: Executando sed para alterar o path dos certificados do prosody
+      shell: sed -i "s/\/etc\/prosody\/certs\/localhost/\/var\/lib\/prosody\/\{{ ansible_host }}/" /etc/prosody/prosody.cfg.lua 
+      become: yes
+    
+    - name: Executando sed para alterar o nome do virtualhost do prosody
+      shell: sed -i "s/\/etc\/prosody\/certs\/example.com/\/var\/lib\/prosody\/\{{ ansible_host }}/" /etc/prosody/prosody.cfg.lua 
+      become: yes
+
+    - name: Executando sed para comentar a variavel enabled no prosody
+      shell: sed -i 's/enabled = false/-- enabled = false/' /etc/prosody/prosody.cfg.lua 
+      become: yes  
+
+    - name: Executando sed para comentar a variavel enabled no prosody
+      shell: sed -i 's/allow_registration/-- allow_registration/' /etc/prosody/prosody.cfg.lua 
+      become: yes  
+ 
+  
+    

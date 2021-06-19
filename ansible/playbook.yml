@@ -1,0 +1,6 @@
+---
+
+- hosts: app
+  roles:
+    - instala_pacotes
+    - copia_files

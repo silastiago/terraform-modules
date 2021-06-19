@@ -1,0 +1,4 @@
+[app]
+%{ for index, dns in app-dns ~}
+${dns} ansible_host=${dns} ansible_user=ubuntu ansible_ssh_private_key_file=/home/silas/.ssh/terraform.pem
+%{ endfor ~}

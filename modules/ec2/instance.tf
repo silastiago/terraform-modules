@@ -7,7 +7,8 @@ resource "aws_instance" "app" {
     Name = var.instance_name
   }
   vpc_security_group_ids = ["${aws_security_group.acesso-ssh.id}", 
-                            "${aws_security_group.acesso-web.id}"
+                            "${aws_security_group.acesso-web.id}",
+                            "${aws_security_group.acesso-prosody.id}"
                             ]
   root_block_device {
     volume_size = var.volume_size
